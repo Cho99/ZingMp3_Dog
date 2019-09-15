@@ -40,9 +40,14 @@ public class Fragment_Banner extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_banner, container, false);
-
+        AnhXa();
         GetData();
         return view;
+    }
+
+    private void AnhXa() {
+        viewPager = view.findViewById(R.id.viewPager);
+        circleIndicator = view.findViewById(R.id.indicatordefault);
     }
 
     private void GetData() {
@@ -51,8 +56,25 @@ public class Fragment_Banner extends Fragment {
         callback.enqueue(new Callback<List<Banner>>() {
             @Override
             public void onResponse(Call<List<Banner>> call, Response<List<Banner>> response) {
-                    List<Banner> banners = response.body();
+                    ArrayList<Banner> banners = (ArrayList<Banner>) response.body();
                     Log.d("Dog", banners.get(0).getNameSong());
+                    bannerAdapter = new BannerAdapter(getActivity(), banners);
+                    viewPager.setAdapter(bannerAdapter);
+                    circleIndicator.setViewPager(viewPager);
+                    handler = new Handler();
+                    runnable = new Runnable() {
+                        @Override
+                        public void run() {
+                            currentItem = viewPager.getCurrentItem();
+                            currentItem++;
+                            if ( currentItem >= viewPager.getAdapter().getCount()) {
+                                currentItem = 0;
+                            }
+                            viewPager.setCurrentItem(currentItem, true);
+                            handler.postDelayed(runnable, 4500);
+                        }
+                    };
+                    handler.postDelayed(runnable, 4500);
             }
             @Override
             public void onFailure(Call<List<Banner>> call, Throwable t) {

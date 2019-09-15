@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <ImageView
@@ -33,16 +34,15 @@
             android:textColor="#ffffff"
             android:textStyle="bold"
             android:text="Song Name"
-            android:textSize="17sp"
+            android:textSize="12sp"
             android:id="@+id/textviewTitleBanner"
-            android:layout_marginTop="5dp"
             android:layout_alignTop="@id/imageviewBanner"
             android:layout_toRightOf="@id/imageviewBanner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
         <RelativeLayout
-            android:layout_marginTop="7dp"
+            android:layout_marginTop="2dp"
             android:layout_toRightOf="@id/imageviewBanner"
             android:layout_below="@id/textviewTitleBanner"
             android:layout_width="match_parent"
@@ -55,7 +55,6 @@
                 android:layout_marginRight="40dp"
                 android:textSize="13dp"
                 android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-
         </RelativeLayout>
     </RelativeLayout>
 
