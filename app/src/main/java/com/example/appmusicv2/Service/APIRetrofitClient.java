@@ -18,14 +18,14 @@ public class APIRetrofitClient {
 
         //Khởi tạo giao thức
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .readTimeout(10000, TimeUnit.MILLISECONDS)
-                .writeTimeout(10000, TimeUnit.MILLISECONDS)
-                .connectTimeout(10000, TimeUnit.MICROSECONDS)
+                .readTimeout(1000000, TimeUnit.MILLISECONDS)
+                .writeTimeout(1000000, TimeUnit.MILLISECONDS)
+                .connectTimeout(1000000, TimeUnit.MILLISECONDS)
                 .retryOnConnectionFailure(true)
                 .protocols(Arrays.asList(Protocol.HTTP_1_1))
                 .build();
-        //Đọc dữ liệu Gson
         Gson gson = new GsonBuilder().setLenient().create();
+
         retrofit = new Retrofit.Builder()
                 .baseUrl(base_url)
                 .client(okHttpClient)

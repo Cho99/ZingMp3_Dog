@@ -51,10 +51,9 @@ public class Fragment_Banner extends Fragment {
         callback.enqueue(new Callback<List<Banner>>() {
             @Override
             public void onResponse(Call<List<Banner>> call, Response<List<Banner>> response) {
-               ArrayList<Banner> banners = (ArrayList<Banner>) response.body();
-                Log.d("AAA", banners.get(0).getNameSong());
+                    List<Banner> banners = response.body();
+                    Log.d("Dog", banners.get(0).getNameSong());
             }
-
             @Override
             public void onFailure(Call<List<Banner>> call, Throwable t) {
 

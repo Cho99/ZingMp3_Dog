@@ -12,6 +12,6 @@ public interface Dataservice {
     @GET("server/songbanner.php")
     Call<List<Banner>> GetDataBanner();
 
-    @GET("playlist.php")
+    @GET("/server/playlist.php")
      Call<List<Playlist>> GetDataPlayList();
 }
