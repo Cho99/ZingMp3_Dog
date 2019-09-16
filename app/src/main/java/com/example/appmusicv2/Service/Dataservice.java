@@ -4,6 +4,7 @@ import com.example.appmusicv2.Model.Album;
 import com.example.appmusicv2.Model.Banner;
 import com.example.appmusicv2.Model.KindAndTopic;
 import com.example.appmusicv2.Model.Playlist;
+import com.example.appmusicv2.Model.Song;
 
 import java.util.List;
 
@@ -22,4 +23,7 @@ public interface Dataservice {
 
     @GET("server/albumhot.php")
     Call<List<Album>> GetDataAlbum();
+
+    @GET("server/song.php")
+    Call<List<Song>> GetDataSong();
 }

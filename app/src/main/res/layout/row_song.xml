@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/imageviewSongHot"
+        android:scaleType="fitXY"
+        android:layout_margin="5dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"/>
+
+    <TextView
+        android:textColor="#363636"
+        android:textSize="15sp"
+        android:text="Song Name"
+        android:singleLine="true"
+        android:layout_toRightOf="@id/imageviewSongHot"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="7dp"
+        android:id="@+id/textviewNameHotSong"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:singleLine="true"
+        android:layout_below="@id/textviewNameHotSong"
+        android:layout_toRightOf="@id/imageviewSongHot"
+        android:textColor="#8c8a8a"
+        android:textSize="15sp"
+        android:text="Name Singer"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="7dp"
+        android:id="@+id/textviewName_Singer_Hot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <ImageView
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/iconlove"
+        android:layout_marginRight="10dp"
+        android:id="@+id/imageviewLike"
+        android:layout_width="30dp"
+        android:layout_height="30dp"/>
+
+</RelativeLayout>
