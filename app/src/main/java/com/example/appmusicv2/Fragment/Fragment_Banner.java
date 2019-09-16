@@ -57,7 +57,7 @@ public class Fragment_Banner extends Fragment {
             @Override
             public void onResponse(Call<List<Banner>> call, Response<List<Banner>> response) {
                     ArrayList<Banner> banners = (ArrayList<Banner>) response.body();
-                    Log.d("Dog", banners.get(0).getNameSong());
+                    Log.d("Dog", banners.get(0).getContext());
                     bannerAdapter = new BannerAdapter(getActivity(), banners);
                     viewPager.setAdapter(bannerAdapter);
                     circleIndicator.setViewPager(viewPager);

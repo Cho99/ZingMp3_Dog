@@ -1,6 +1,7 @@
 package com.example.appmusicv2.Service;
 
 import com.example.appmusicv2.Model.Banner;
+import com.example.appmusicv2.Model.KindAndTopic;
 import com.example.appmusicv2.Model.Playlist;
 
 import java.util.List;
@@ -12,6 +13,9 @@ public interface Dataservice {
     @GET("server/songbanner.php")
     Call<List<Banner>> GetDataBanner();
 
-    @GET("/server/playlist.php")
+    @GET("server/playlist.php")
      Call<List<Playlist>> GetDataPlayList();
+
+    @GET("server/topicandkind.php")
+    Call<KindAndTopic> GetCategoryMusic();
 }
