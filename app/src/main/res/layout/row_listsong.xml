@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:elevation="5dp">
+
+    <RelativeLayout
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_margin="15dp"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:text="1"
+            android:textColor="#030303"
+            android:id="@+id/textviewListSongIndex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/texviewListSongName"
+            android:textSize="20dp"
+            android:text="Name Song"
+            android:textColor="#030303"
+            android:layout_toRightOf="@id/textviewListSongIndex"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:maxWidth="250dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:text="Singer"
+            android:textSize="20sp"
+            android:textColor="#979797"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:layout_toRightOf="@id/textviewListSongIndex"
+            android:layout_below="@id/texviewListSongName"
+            android:id="@+id/textviewListSongSinger"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <ImageView
+            android:layout_marginRight="5dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/iconlove"
+            android:id="@+id/imageListSongLike"
+            android:layout_width="30dp"
+            android:layout_height="30dp"/>
+    </RelativeLayout>
+
+
+</androidx.cardview.widget.CardView>

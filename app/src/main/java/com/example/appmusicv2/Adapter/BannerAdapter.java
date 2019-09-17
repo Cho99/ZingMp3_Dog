@@ -1,16 +1,19 @@
 package com.example.appmusicv2.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
+import com.example.appmusicv2.Activity.ListSongActivity;
 import com.example.appmusicv2.Model.Banner;
 import com.example.appmusicv2.R;
 import com.squareup.picasso.Picasso;
@@ -38,7 +41,7 @@ public class BannerAdapter extends PagerAdapter {
 
     @NonNull
     @Override
-    public Object instantiateItem(@NonNull ViewGroup container, int position) {
+    public Object instantiateItem(@NonNull ViewGroup container, final int position) {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         View view = layoutInflater.inflate(R.layout.row_banner, null);
         ImageView imgBackGroudBanner = view.findViewById(R.id.imageviewBackgroudBanner);
@@ -50,6 +53,15 @@ public class BannerAdapter extends PagerAdapter {
         Picasso.get().load(arrayListbanner.get(position).getImageSong()).into(imgSongBanner);
         textTitelBanner.setText(arrayListbanner.get(position).getNameSong());
         txtContext.setText(arrayListbanner.get(position).getContext());
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, ListSongActivity.class);
+                intent.putExtra("data", arrayListbanner.get(position));
+                context.startActivity(intent);
+            }
+        });
 
         container.addView(view);
         return view;
