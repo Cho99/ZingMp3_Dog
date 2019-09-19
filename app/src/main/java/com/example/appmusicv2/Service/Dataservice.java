@@ -2,9 +2,11 @@ package com.example.appmusicv2.Service;
 
 import com.example.appmusicv2.Model.Album;
 import com.example.appmusicv2.Model.Banner;
+import com.example.appmusicv2.Model.Kind;
 import com.example.appmusicv2.Model.KindAndTopic;
 import com.example.appmusicv2.Model.Playlist;
 import com.example.appmusicv2.Model.Song;
+import com.example.appmusicv2.Model.Topic;
 
 import java.util.List;
 
@@ -34,4 +36,17 @@ public interface Dataservice {
     @POST("server/listsong.php")
     Call<List<Song>> GetListSongBanner(@Field("id_advertisement") String id_advertisement);
 
+    @FormUrlEncoded
+    @POST("server/listsong.php")
+    Call<List<Song>> GetListSongPlayList(@Field("id_playlist") String id_playlist);
+
+    @GET("server/playlist.php")
+    Call<List<Playlist>> GetPlayList();
+
+    @FormUrlEncoded
+    @POST("server/listsong.php")
+    Call<List<Song>> GetDataKindSong(@Field("id_kind") String id_kind);
+
+    @GET("server/all_topic.php")
+    Call<List<Topic>> GetAllTopic();
 }

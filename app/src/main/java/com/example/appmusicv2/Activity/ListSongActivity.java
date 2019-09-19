@@ -21,6 +21,8 @@ import android.widget.Toast;
 
 import com.example.appmusicv2.Adapter.ListSongAdapter;
 import com.example.appmusicv2.Model.Banner;
+import com.example.appmusicv2.Model.Kind;
+import com.example.appmusicv2.Model.Playlist;
 import com.example.appmusicv2.Model.Song;
 import com.example.appmusicv2.R;
 import com.example.appmusicv2.Service.APIService;
@@ -49,6 +51,8 @@ public class ListSongActivity extends AppCompatActivity {
     FloatingActionButton floatingActionButton;
     ImageView imageView;
     Banner banner;
+    Playlist playlist;
+    Kind kind;
     ArrayList<Song> array_song;
     ListSongAdapter adapter;
 
@@ -63,6 +67,54 @@ public class ListSongActivity extends AppCompatActivity {
             setValueInView(banner.getNameSong(), banner.getImageSong());
             GetDataBanner(banner.getIdAdvertisement());
         }
+        if (playlist != null && !playlist.getName().equals("")) {
+            setValueInView(playlist.getName(), playlist.getImagePlayList());
+            GetDataPlayList(playlist.getIdPlayList());
+        }
+        if (kind != null && !kind.getNameKind().equals("")) {
+            setValueInView(kind.getNameKind(), kind.getImageKind());
+            GetDataKind(kind.getIdKind());
+        }
+
+    }
+
+    private void GetDataKind(String idKind) {
+        Dataservice dataservice = APIService.getService();
+        Call<List<Song>> callback = dataservice.GetDataKindSong(idKind);
+        callback.enqueue(new Callback<List<Song>>() {
+            @Override
+            public void onResponse(Call<List<Song>> call, Response<List<Song>> response) {
+                array_song = (ArrayList<Song>) response.body();
+                adapter = new ListSongAdapter(ListSongActivity.this, array_song);
+                recyclerView.setLayoutManager(new LinearLayoutManager(ListSongActivity.this));
+                recyclerView.setAdapter(adapter);
+            }
+            @Override
+            public void onFailure(Call<List<Song>> call, Throwable t) {
+
+            }
+        });
+
+
+    }
+
+    private void GetDataPlayList(String idPlayList) {
+        Dataservice dataservice = APIService.getService();
+        Call<List<Song>> call = dataservice.GetListSongPlayList(idPlayList);
+        call.enqueue(new Callback<List<Song>>() {
+            @Override
+            public void onResponse(Call<List<Song>> call, Response<List<Song>> response) {
+                array_song = (ArrayList<Song>) response.body();
+                adapter = new ListSongAdapter(ListSongActivity.this, array_song);
+                recyclerView.setLayoutManager(new LinearLayoutManager(ListSongActivity.this));
+                recyclerView.setAdapter(adapter);
+            }
+
+            @Override
+            public void onFailure(Call<List<Song>> call, Throwable t) {
+
+            }
+        });
     }
 
     private void setValueInView(String name, String image) {
@@ -126,7 +178,12 @@ public class ListSongActivity extends AppCompatActivity {
         if (intent != null) {
             if (intent.hasExtra("data")) {
                 banner = (Banner) intent.getSerializableExtra("data");
-//                Toast.makeText(this, banner.getImageSong(), Toast.LENGTH_SHORT).show();
+            }
+            if (intent.hasExtra("iteamplaylist")) {
+                playlist = (Playlist) intent.getSerializableExtra("iteamplaylist");
+            }
+            if (intent.hasExtra("idkind")) {
+               kind = (Kind) intent.getSerializableExtra("idkind");
             }
         }
     }

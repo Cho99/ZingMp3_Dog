@@ -1,19 +1,24 @@
 package com.example.appmusicv2.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.appmusicv2.Activity.ListSongActivity;
+import com.example.appmusicv2.Activity.PlayListActivity;
 import com.example.appmusicv2.Adapter.PlayListAdapter;
 import com.example.appmusicv2.Model.Playlist;
 import com.example.appmusicv2.R;
@@ -44,6 +49,13 @@ public class Fragment_Playlist extends Fragment {
         txtTitlePlayList = view.findViewById(id.textviewTitlePlayList);
         txtviewmorePlayList = view.findViewById(id.textviewMorePlayList);
         GetData();
+        txtviewmorePlayList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), PlayListActivity.class);
+                startActivity(intent);
+            }
+        });
         return view;
     }
 
@@ -57,6 +69,14 @@ public class Fragment_Playlist extends Fragment {
                 playListAdapter = new PlayListAdapter(getActivity(), android.R.layout.simple_list_item_1, array_playlist);
                 lvPlayList.setAdapter(playListAdapter);
                 setListViewHeightBasedOnChildren(lvPlayList);
+                lvPlayList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        Intent intent = new Intent(getActivity(), ListSongActivity.class);
+                        intent.putExtra("iteamplaylist", array_playlist.get(i));
+                        startActivity(intent);
+                    }
+                });
             }
 
             @Override

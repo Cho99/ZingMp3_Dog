@@ -1,5 +1,6 @@
 package com.example.appmusicv2.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,12 +10,15 @@ import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
+import com.example.appmusicv2.Activity.ListSongActivity;
+import com.example.appmusicv2.Activity.ListTopicActivity;
 import com.example.appmusicv2.Model.Kind;
 import com.example.appmusicv2.Model.KindAndTopic;
 import com.example.appmusicv2.Model.Topic;
@@ -39,6 +43,13 @@ public class Fragment_Kind_Topic_today extends Fragment {
         view = inflater.inflate(R.layout.fragment_kind_topic_today, container, false);
         txtViewTopicAndKind = view.findViewById(R.id.textViewViewMore);
         horizontalScrollView = view.findViewById(R.id.horizontalScrollView);
+        txtViewTopicAndKind.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), ListTopicActivity.class);
+                startActivity(intent);
+            }
+        });
         GetData();
         return view;
     }
@@ -85,6 +96,15 @@ public class Fragment_Kind_Topic_today extends Fragment {
                    cardView.setLayoutParams(layoutParams);
                    cardView.addView(imageView);
                    linearLayout.addView(cardView);
+                   final int vitri = j;
+                   imageView.setOnClickListener(new View.OnClickListener() {
+                       @Override
+                       public void onClick(View view) {
+                           Intent intent = new Intent(getActivity(), ListSongActivity.class);
+                           intent.putExtra("idkind", array_Kind.get(vitri));
+                           startActivity(intent);
+                       }
+                   });
                }
                horizontalScrollView.addView(linearLayout);
            }

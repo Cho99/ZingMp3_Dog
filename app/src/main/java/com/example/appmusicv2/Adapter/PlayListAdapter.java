@@ -26,7 +26,7 @@ public class PlayListAdapter extends ArrayAdapter<Playlist> {
     class ViewHolder {
         TextView txtNamePlayList;
         ImageView imgPlayList;
-        ImageButton imgButtonBackGroud;
+        ImageView imgButtonBackGroud;
     }
 
     @NonNull
