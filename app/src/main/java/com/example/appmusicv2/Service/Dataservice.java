@@ -49,4 +49,8 @@ public interface Dataservice {
 
     @GET("server/all_topic.php")
     Call<List<Topic>> GetAllTopic();
+
+    @FormUrlEncoded
+    @POST("server/categoriesbysubject.php")
+    Call<List<Kind>> GetDataCatergoryBySubject(@Field("id_topic") String id_topic);
 }

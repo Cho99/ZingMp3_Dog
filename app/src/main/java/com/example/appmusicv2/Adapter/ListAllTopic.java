@@ -1,14 +1,17 @@
 package com.example.appmusicv2.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.appmusicv2.Activity.CategoriesbysubjectActivity;
 import com.example.appmusicv2.Model.Topic;
 import com.example.appmusicv2.R;
 import com.squareup.picasso.Picasso;
@@ -49,6 +52,14 @@ public class ListAllTopic extends RecyclerView.Adapter<ListAllTopic.ViewHolder>{
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             imgToppic = itemView.findViewById(R.id.imagaviewRowTopic);
+            imgToppic.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, CategoriesbysubjectActivity.class);
+                    intent.putExtra("topic", array_topic.get(getPosition()));
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 }
