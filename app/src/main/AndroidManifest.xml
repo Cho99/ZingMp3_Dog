@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.CategoriesbysubjectActivity"></activity>
+        <activity android:name=".Activity.PlaySongActivity"></activity>
+        <activity android:name=".Activity.ListAllAlbumActivity" />
+        <activity android:name=".Activity.CategoriesbysubjectActivity" />
         <activity android:name=".Activity.ListTopicActivity" />
         <activity android:name=".Activity.PlayListActivity" />
         <activity android:name=".Activity.ListSongActivity" />

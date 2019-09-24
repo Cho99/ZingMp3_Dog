@@ -20,7 +20,6 @@
                 android:scaleType="fitCenter"
                 android:layout_width="180dp"
                 android:layout_height="180dp"/>
-
         </FrameLayout>
         <TextView
             android:textColor="#f000"

@@ -53,4 +53,16 @@ public interface Dataservice {
     @FormUrlEncoded
     @POST("server/categoriesbysubject.php")
     Call<List<Kind>> GetDataCatergoryBySubject(@Field("id_topic") String id_topic);
+
+    @GET("server/all_album.php")
+    Call<List<Album>> GetDataAllAlbum();
+
+    @FormUrlEncoded
+    @POST("server/listsong.php")
+    Call<List<Song>> GetDataListSongAlbum(@Field("id_album") String id_album);
+
+    @FormUrlEncoded
+    @POST("server/update_like.php")
+    Call<String> UpateLike(@Field("id_song") String id_song, @Field("like") String like);
+
 }

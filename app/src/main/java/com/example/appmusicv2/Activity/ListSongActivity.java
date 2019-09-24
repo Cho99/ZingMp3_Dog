@@ -14,12 +14,14 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.appmusicv2.Adapter.ListSongAdapter;
+import com.example.appmusicv2.Model.Album;
 import com.example.appmusicv2.Model.Banner;
 import com.example.appmusicv2.Model.Kind;
 import com.example.appmusicv2.Model.Playlist;
@@ -55,11 +57,14 @@ public class ListSongActivity extends AppCompatActivity {
     Kind kind;
     ArrayList<Song> array_song;
     ListSongAdapter adapter;
+    Album album;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_song);
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
         AnhXa();
         DataIntent();
         init();
@@ -75,7 +80,30 @@ public class ListSongActivity extends AppCompatActivity {
             setValueInView(kind.getNameKind(), kind.getImageKind());
             GetDataKind(kind.getIdKind());
         }
+        if (album != null && !album.getNameAlbum().equals("")) {
+            setValueInView(album.getNameAlbum(), album.getImageAlbum());
+            GetDataAlbum(album.getIdAlbum());
+        }
 
+    }
+
+    private void GetDataAlbum(String idAlbum) {
+        Dataservice dataservice = APIService.getService();
+        Call<List<Song>> call = dataservice.GetDataListSongAlbum(idAlbum);
+        call.enqueue(new Callback<List<Song>>() {
+            @Override
+            public void onResponse(Call<List<Song>> call, Response<List<Song>> response) {
+                array_song = (ArrayList<Song>) response.body();
+                adapter = new ListSongAdapter(ListSongActivity.this, array_song);
+                recyclerView.setLayoutManager(new LinearLayoutManager(ListSongActivity.this));
+                recyclerView.setAdapter(adapter);
+                eventClick();
+            }
+            @Override
+            public void onFailure(Call<List<Song>> call, Throwable t) {
+
+            }
+        });
     }
 
     private void GetDataKind(String idKind) {
@@ -88,6 +116,7 @@ public class ListSongActivity extends AppCompatActivity {
                 adapter = new ListSongAdapter(ListSongActivity.this, array_song);
                 recyclerView.setLayoutManager(new LinearLayoutManager(ListSongActivity.this));
                 recyclerView.setAdapter(adapter);
+                eventClick();
             }
             @Override
             public void onFailure(Call<List<Song>> call, Throwable t) {
@@ -108,6 +137,7 @@ public class ListSongActivity extends AppCompatActivity {
                 adapter = new ListSongAdapter(ListSongActivity.this, array_song);
                 recyclerView.setLayoutManager(new LinearLayoutManager(ListSongActivity.this));
                 recyclerView.setAdapter(adapter);
+                eventClick();
             }
 
             @Override
@@ -119,14 +149,7 @@ public class ListSongActivity extends AppCompatActivity {
 
     private void setValueInView(String name, String image) {
         collapsingToolbarLayout.setTitle(name);
-        try {
-            URL url = new URL(image);
-//            Bitmap bitmap = new Bitmap(url.openConnection().getInputStream());
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
     }
 
 
@@ -137,10 +160,10 @@ public class ListSongActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Song>> call, Response<List<Song>> response) {
               array_song = (ArrayList<Song>) response.body();
-              Toast.makeText(ListSongActivity.this, array_song.get(0).getNameSong(), Toast.LENGTH_SHORT).show();
               adapter = new ListSongAdapter(ListSongActivity.this, array_song);
               recyclerView.setLayoutManager(new LinearLayoutManager(ListSongActivity.this));
               recyclerView.setAdapter(adapter);
+              eventClick();
             }
 
             @Override
@@ -162,6 +185,7 @@ public class ListSongActivity extends AppCompatActivity {
         });
         collapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);
         collapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);
+        floatingActionButton.setEnabled(false);
     }
 
     private void AnhXa() {
@@ -185,6 +209,20 @@ public class ListSongActivity extends AppCompatActivity {
             if (intent.hasExtra("idkind")) {
                kind = (Kind) intent.getSerializableExtra("idkind");
             }
+            if (intent.hasExtra("id_album")) {
+                album = (Album) intent.getSerializableExtra("id_album");
+            }
         }
+    }
+    private void eventClick() {
+        floatingActionButton.setEnabled(true);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ListSongActivity.this, PlaySongActivity.class);
+                intent.putExtra("list_song", array_song);
+                startActivity(intent);
+            }
+        });
     }
 }

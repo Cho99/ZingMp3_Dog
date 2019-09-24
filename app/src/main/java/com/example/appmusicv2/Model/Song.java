@@ -1,9 +1,14 @@
 package com.example.appmusicv2.Model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Song {
+import java.io.Serializable;
+
+public class Song implements Parcelable {
 
 @SerializedName("Id_Song")
 @Expose
@@ -24,7 +29,28 @@ private String linkSong;
 @Expose
 private String like;
 
-public String getIdSong() {
+    protected Song(Parcel in) {
+        idSong = in.readString();
+        nameSong = in.readString();
+        imgSong = in.readString();
+        singer = in.readString();
+        linkSong = in.readString();
+        like = in.readString();
+    }
+
+    public static final Creator<Song> CREATOR = new Creator<Song>() {
+        @Override
+        public Song createFromParcel(Parcel in) {
+            return new Song(in);
+        }
+
+        @Override
+        public Song[] newArray(int size) {
+            return new Song[size];
+        }
+    };
+
+    public String getIdSong() {
 return idSong;
 }
 
@@ -72,4 +98,18 @@ public void setLike(String like) {
 this.like = like;
 }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(idSong);
+        parcel.writeString(nameSong);
+        parcel.writeString(imgSong);
+        parcel.writeString(singer);
+        parcel.writeString(linkSong);
+        parcel.writeString(like);
+    }
 }
