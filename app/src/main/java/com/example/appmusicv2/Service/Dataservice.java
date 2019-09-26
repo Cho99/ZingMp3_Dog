@@ -65,4 +65,8 @@ public interface Dataservice {
     @POST("server/update_like.php")
     Call<String> UpateLike(@Field("id_song") String id_song, @Field("like") String like);
 
+    @FormUrlEncoded
+    @POST("server/search_song.php")
+    Call<List<Song>> GetSearchSong(@Field("key") String key);
+
 }

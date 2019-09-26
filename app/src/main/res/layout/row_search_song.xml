@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:layout_margin="3dp"
+        android:scaleType="fitXY"
+        android:id="@+id/imageviewSearch"
+        android:layout_width="80dp"
+        android:layout_height="80dp"/>
+    <TextView
+    android:id="@+id/textviewSearchSong"
+    android:textSize="18sp"
+    android:textColor="#0a0a0a"
+    android:text="Name Song"
+    android:layout_marginTop="7dp"
+    android:layout_marginLeft="5dp"
+    android:maxWidth="250dp"
+    android:layout_toRightOf="@+id/imageviewSearch"
+    android:singleLine="true"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/textviewSearchSinger"
+        android:textSize="15sp"
+        android:textColor="#0a0a0a"
+        android:text="Singer"
+        android:layout_marginTop="7dp"
+        android:layout_marginLeft="5dp"
+        android:maxWidth="250dp"
+        android:layout_below="@+id/textviewSearchSong"
+        android:layout_toRightOf="@+id/imageviewSearch"
+        android:singleLine="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <ImageView
+        android:layout_marginRight="10dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/iconlove"
+        android:id="@+id/imageSearchLike"
+        android:layout_width="30dp"
+        android:layout_height="30dp" />
+</RelativeLayout>
